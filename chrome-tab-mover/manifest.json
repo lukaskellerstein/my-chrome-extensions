@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Mover",
+  "version": "1.1.0",
+  "description": "Switch the active tab or move its position via keyboard shortcuts.",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["tabs"],
+  "commands": {
+    "select-tab-left": {
+      "suggested_key": {
+        "default": "Ctrl+Left",
+        "mac": "MacCtrl+Left"
+      },
+      "description": "Switch to the tab on the left"
+    },
+    "select-tab-right": {
+      "suggested_key": {
+        "default": "Ctrl+Right",
+        "mac": "MacCtrl+Right"
+      },
+      "description": "Switch to the tab on the right"
+    },
+    "move-tab-left": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Left",
+        "mac": "MacCtrl+Shift+Left"
+      },
+      "description": "Move active tab one position to the left"
+    },
+    "move-tab-right": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Right",
+        "mac": "MacCtrl+Shift+Right"
+      },
+      "description": "Move active tab one position to the right"
+    }
+  }
+}
