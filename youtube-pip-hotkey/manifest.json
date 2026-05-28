@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube PiP Hotkey",
+  "version": "1.0.0",
+  "description": "Toggle Picture-in-Picture on YouTube with Option+G. Pairs with a Hammerspoon watcher that pins the PiP window.",
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*", "*://*.youtube-nocookie.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
