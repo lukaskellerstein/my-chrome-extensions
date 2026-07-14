@@ -1,0 +1,38 @@
+name: Release extensions
+
+# Trigger by pushing a version tag, e.g.:
+#   git tag v1.0.0
+#   git push origin v1.0.0
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package each extension into a zip
+        run: |
+          mkdir -p dist
+          # An "extension" is any top-level folder containing a manifest.json
+          for manifest in */manifest.json; do
+            dir="$(dirname "$manifest")"
+            version="$(node -p "require('./$dir/manifest.json').version")"
+            zipname="${dir}-v${version}.zip"
+            echo "Packaging $dir (v$version) -> $zipname"
+            (cd "$dir" && zip -r "../dist/$zipname" . -x '*.DS_Store')
+          done
+          ls -la dist
+
+      - name: Create GitHub release with artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
